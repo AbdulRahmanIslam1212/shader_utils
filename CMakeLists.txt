@@ -53,13 +53,11 @@ write_basic_package_version_file(
     COMPATIBILITY SameMajorVersion
 )
 
-file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/shader_utilsConfig.cmake" [=[
-@PACKAGE_INIT@
-include(CMakeFindDependencyMacro)
-find_dependency(OpenGL)
-include("${CMAKE_CURRENT_LIST_DIR}/shader_utilsTargets.cmake")
-check_required_components(shader_utils)
-]=])
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shader_utilsConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/shader_utilsConfig.cmake"
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/shader_utils
+)
 
 install(EXPORT shader_utilsTargets
     FILE shader_utilsTargets.cmake
